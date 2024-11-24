@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   python: circleci/python@2.0.3
+  aws-cli: circleci/aws-cli@5.1
 jobs:
   cfn-lint:
     executor: python/default
@@ -11,10 +12,6 @@ jobs:
           name: run cfn-lint
           command: |
             cfn-lint -i W3002 -t cloudformation/*.yml
-
-orbs:
-  aws-cli: circleci/aws-cli@5.1
-jobs:
   appstack:
     executor: aws-cli/default
     steps:
