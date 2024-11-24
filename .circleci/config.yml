@@ -12,7 +12,8 @@ jobs:
           name: run cfn-lint
           command: |
             cfn-lint -i W3002 -t cloudformation/*.yml
-  appstack:
+            
+  cfn-deploy:
     executor: aws-cli/default
     steps:
       - checkout
@@ -20,13 +21,12 @@ jobs:
       - aws-cli/assume_role_with_web_identity:
           role_arn: $AWS_OIDC_ROLE_ARN
       - run: 
-          name: Deploy VPC
-          command: aws cloudformation deploy --template-file ./cloudformation/app.yml --stack-name app  --no-fail-on-empty-changeset --region ap-northeast-1
-
+          name: run cfn-deploy
+          command: aws cloudformation deploy --template-file ./cloudformation/*.yml
 workflows:
   cfn-lint:
     jobs:
       - cfn-lint
   cfn-deploy:
     jobs:
-      - appstack
+      - cfn-deploy
