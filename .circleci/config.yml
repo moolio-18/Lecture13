@@ -12,15 +12,19 @@ jobs:
           name: run cfn-lint
           command: |
             cfn-lint -i W3002 -t cloudformation/*.yml
-
   cfn-deploy:
     executor: aws-cli/default
     steps:
       - checkout
-      - aws-cli/install
+      - aws-cli/setup:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+          region: AWS_DEFAULT_REGION
       - run: 
-          name: run cfn-deploy
-          command: aws cloudformation deploy --template-file ./cloudformation/network.yml --stack-name network
+          name: Deploy to was from template
+          command: |
+            set -x
+            aws cloudformation deploy --template-file ./cloudformation/network.yml --stack-name network
 #          command: aws cloudformation deploy --template-file ./cloudformation/security.yml --stack-name security
 #          command: aws cloudformation deploy --template-file ./cloudformation/app.yml --stack-name app
 
