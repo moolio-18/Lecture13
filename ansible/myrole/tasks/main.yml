@@ -1,0 +1,4 @@
+---
+- name: touch file
+  shell: touch example.txt
+# tasks file for myrole
