@@ -1,6 +1,5 @@
 ---
-- hosts: 35.77.46.27
-  gather_facts: false
+- hosts: ansible_client
   become: true
 
   tasks:
