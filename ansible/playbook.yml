@@ -1,3 +1,4 @@
-- hosts: example
+---
+- hosts: all 
   roles:
     - touch_file
