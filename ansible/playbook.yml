@@ -1,5 +1,10 @@
 ---
-- hosts: all 
-  become: yes
-  roles:
-    - touch_file
+- hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: /test2
+        state: directory
