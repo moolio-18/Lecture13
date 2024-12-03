@@ -11,7 +11,9 @@ jobs:
       - ansible-playbook/playbook:
           playbook: ansible/playbook.yml
 #          private-key: <<parameters.private-key>>
-
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:r/E8hB4GzO0xE79iwz+yDW1I7fZMFKeqNXjaGdYuYl8"
 workflows:
   version: 2
   ansibledeploy:
