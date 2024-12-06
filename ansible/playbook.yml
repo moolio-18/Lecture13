@@ -1,9 +1,7 @@
 ---
-- hosts: ansible_client
-  become: true
-
-  tasks:
-    - name: Create directory
-      ansible.builtin.file:
-        path: /test2
-        state: directory
+- name: Install git
+  become: yes
+  yum:
+    name: git
+    state: present
+    lock_timeout: 180
