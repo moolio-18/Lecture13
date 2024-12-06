@@ -1,7 +1,10 @@
 ---
-- name: Install git
+- name: Set Up TaegetNode
+  hosts: 57.182.80.171
   become: yes
-  yum:
-    name: git
-    state: present
-    lock_timeout: 180
+  tasks:
+    - name: Install Git
+      ansible.builtin.yum:
+        name:git
+        state: present
+        lock_timeout: 180
